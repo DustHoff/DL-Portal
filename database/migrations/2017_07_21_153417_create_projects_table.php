@@ -17,8 +17,6 @@ class CreateProjectsTable extends Migration
             $table->bigIncrements('id');
             $table->char("name")->unique();
             $table->longText("desc")->nullable();
-            $table->char("configuration_type",100);
-            $table->bigInteger("configuration_id")->unsigned();
             $table->timestamps();
         });
     }

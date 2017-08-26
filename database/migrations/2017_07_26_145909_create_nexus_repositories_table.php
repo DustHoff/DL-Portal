@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateProjectUserTable extends Migration
+class CreateNexusRepositoriesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,12 @@ class CreateProjectUserTable extends Migration
      */
     public function up()
     {
-        Schema::create("project_user", function (Blueprint $table){
-           $table->bigIncrements("id");
-           $table->bigInteger("user_id")->unsigned();
-           $table->bigInteger("project_id")->unsigned();
+        Schema::create('nexus_repositories', function (Blueprint $table) {
+            $table->increments('id');
+            $table->char("url",255);
+            $table->char("username",32);
+            $table->longText("password");
+            $table->timestamps();
         });
     }
 
@@ -27,6 +29,6 @@ class CreateProjectUserTable extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('nexus_repositories');
     }
 }
