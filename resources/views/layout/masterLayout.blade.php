@@ -5,13 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <title>@yield("title")</title>
+    <meta name="csrf-token" content="{{csrf_token()}}">
 
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
-          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
-          integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
-    @yield("head")
-    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <link rel="stylesheet" href="{{ asset("css/app.css") }}">
+@yield("head")
+<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
     <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
@@ -19,6 +17,72 @@
 </head>
 
 <body>
+<div id="vueapp" class="container-fluid">
+    @if(!\Illuminate\Support\Facades\Auth::check())
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">Login</div>
+                    <div class="panel-body">
+                        <form class="form-horizontal" method="post" action="{{route('login')}}">
+                            {{csrf_field()}}
+                            <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
+                                <label for="email" class="col-md-4 control-label">E-Mail Address</label>
+
+                                <div class="col-md-6">
+                                    <input id="email" type="email" class="form-control" name="email"
+                                           value="{{ old('email') }}" required autofocus>
+
+                                    @if ($errors->has('email'))
+                                        <span class="help-block">
+                                        <strong>{{ $errors->first('email') }}</strong>
+                                    </span>
+                                    @endif
+                                </div>
+                            </div>
+                            <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
+                                <label for="email" class="col-md-4 control-label">Password</label>
+
+                                <div class="col-md-6">
+                                    <input id="email" type="password" class="form-control" name="password"
+                                           value="{{ old('password') }}" required autofocus>
+
+                                    @if ($errors->has('password'))
+                                        <span class="help-block">
+                                        <strong>{{ $errors->first('password') }}</strong>
+                                    </span>
+                                    @endif
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-6 col-md-offset-4">
+                                    <div class="checkbox">
+                                        <label>
+                                            <input type="checkbox"
+                                                   name="remember" {{ old('remember') ? 'checked' : '' }}> Remember Me
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="col-md-8 col-md-offset-4">
+                                    <button type="submit" class="btn btn-primary">
+                                        Login
+                                    </button>
+
+                                    <a class="btn btn-link" href="{{ route('password.request') }}">
+                                        Forgot Your Password?
+                                    </a>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    @else
     @section("body")
         <nav class="navbar navbar-inverse">
             <div class="container">
@@ -43,10 +107,9 @@
         <div id="popup-content" class="modal-dialog" role="document">
         </div>
     </div>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
-            integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
-            crossorigin="anonymous"></script>
+    @endif
+</div>
+<script src="{{ asset("js/app.js") }}"></script>
 @yield("scripts")
 </body>
 </html>

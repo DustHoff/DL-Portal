@@ -9,12 +9,9 @@
         </li>
     </ul>
     <div class="tab-content">
-        <div role="tabpanel" class="tab-pane active" id="projects"></div>
+        <div role="tabpanel" class="tab-pane active" id="projects">
+            <projectlist url="{{route("project.list")}}"/>
+        </div>
         <div role="tabpanel" class="tab-pane" id="users"></div>
     </div>
-@endsection
-@section("scripts")
-    <script>
-        $("#projects").load('{{route("project.list")}}');
-    </script>
 @endsection
