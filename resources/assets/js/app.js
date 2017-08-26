@@ -15,8 +15,15 @@ window.Vue = require('vue');
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-Vue.component('example', require('./components/Example.vue'));
+Vue.component("project",require("./components/project.vue"));
+Vue.component("projectlist",require("./components/projectlist.vue"));
+Vue.component("repository-editor",require("./components/repository-editor.vue"));
+Vue.component("Nexus",require("./components/NexusArtifact.vue"));
+Vue.component("Nexus-Repository",require("./components/NexusRepository.vue"));
+Vue.component("repository", require("./components/repository.vue"));
+Vue.component("versions", require("./components/versions.vue"));
 
-const app = new Vue({
-    el: '#app'
-});
+
+new Vue({
+    el: "#vueapp"
+})
