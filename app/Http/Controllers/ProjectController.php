@@ -18,8 +18,7 @@ class ProjectController extends Controller
      */
     public function index()
     {
-        $projects = Project::all();
-        return view("fragment.project.list",compact("projects"));
+        return Project::all();
     }
 
     /**
@@ -46,14 +45,18 @@ class ProjectController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Project  $project
-     * @return \Illuminate\Http\Response
+     * @param  \App\Project $project
+     * @return mixed
      */
     public function show(Project $project)
     {
         return view("project",compact("project"));
     }
 
+    public function repository(Project $project)
+    {
+        return $project->repositories;
+    }
     /**
      * Show the form for editing the specified resource.
      *

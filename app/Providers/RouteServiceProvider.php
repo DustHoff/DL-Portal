@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Project;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 
@@ -23,8 +24,9 @@ class RouteServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
-        Route::pattern("project","[0-9]+");
+        Route::bind('project',function ($value){
+            return Project::where("name","like",str_replace("-"," ",$value))->first();
+        });
         Route::pattern("artifact","[0-9+]");
         parent::boot();
     }

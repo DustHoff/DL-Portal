@@ -26,9 +26,6 @@ class ProjectRequest extends FormRequest
         return [
             "name" => "required",
             "desc" => "required",
-            "url" => "required",
-            "username" => "required",
-            "password" => "required"
         ];
     }
 }

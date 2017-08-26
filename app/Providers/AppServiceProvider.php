@@ -16,7 +16,7 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         Relation::morphMap([
-            "Nexus" => "App\ProjectNexusConfiguration"
+            "Nexus" => "App\NexusRepository"
         ]);
         Schema::defaultStringLength(191);
     }
